@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-cluster-ip-service
+spec:
+  type: ClusterIP # Default type
+  selector:
+    app: myapp
+    tier: back-end
+  ports:
+    - port: 80
+      targetPort: 80 # targetPort = port if it's not specified

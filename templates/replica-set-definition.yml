@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: myapp-replica-set
+  labels:
+    app: myapp
+    tier: back-end
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      tier: back-end
+  template: # Pod template (pod-definition.yml)
+    metadata:
+      name: myapp-pod
+      labels: # Dictionary
+        app: myapp
+        tier: back-end
+    spec: # Specification
+      containers: # List of dictionaries
+        - name: nginx-container
+          image: nginx # Docker Hub
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 80
